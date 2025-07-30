@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/css/style.css" />
+	<script src="/js/bootstrap.bundle.min.js"></script>
+	<title>{{ title in layout }}</title>
+</head>
+
+<body>
+	<header>
+		{{ header in layout }}
+	</header>
+
+	{{ content in layout }}
+
+	<footer>
+		<div class="p-2 text-center">
+			&copy;
+			foxtail25
+			<a href="https://github.com/FoxTail25" target="_blank"><img src="/img/ico/git.svg" alt="git hub ico"
+					class="icon" /></a>
+			<a href="https://t.me/siverk" target="_blank"><img src="/img/ico/telegram.svg" alt="git hub ico"
+					class="icon" /></a>
+		</div>
+	</footer>
+</body>
+
+</html>

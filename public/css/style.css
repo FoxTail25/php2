@@ -1,0 +1,29 @@
+body {
+	max-width: 1024px;
+	min-height: 100vh;
+	margin: 0 auto;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+}
+label {
+	cursor: pointer;
+}
+.icon {
+	height: 25px;
+	width: 25px;
+}
+.quest {
+	cursor: pointer;
+	width: 1.5rem;
+	height: 1.5rem;
+	text-align: center;
+	border: 1px solid black;
+	border-radius: 50%;
+}
+td {
+	text-align: center;
+}
+th {
+	padding: 0 6px;
+	text-align: center;
+}
