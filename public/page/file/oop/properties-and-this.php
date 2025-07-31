@@ -76,7 +76,7 @@
 	// 	public $salary;
 	// }
 ?>
-
+<hr/>
 <h6>
 	2) Сделайте в классе Employee метод getName, который будет возвращать имя работника.
 </h6>
@@ -110,7 +110,7 @@
 	// 	}
 	// }
 ?>
-
+<hr/>
 <h6>
 	3) Сделайте в классе Employee метод getAge, который будет возвращать возраст работника.
 </h6>
@@ -150,7 +150,7 @@
 	// 	}
 	// }
 ?>
-
+<hr/>
 <h6>
 	4) Сделайте в классе Employee метод getSalary, который будет возвращать зарплату работника.
 </h6>
@@ -196,6 +196,7 @@
 	// }
 	// }
 ?>
+<hr/>
 
 <h6>
 	5) Сделайте в классе Employee метод checkAge, который будет проверять то, что работнику больше 18 лет и возвращать true, если это так, и false, если это не так.
@@ -248,6 +249,7 @@
 	// }
 	// }
 ?>
+<hr/>
 
 <h6>
 	6) Создайте два объекта класса Employee, запишите в их свойства какие-либо значения. С помощью метода getSalary найдите сумму зарплат созданных работников.
@@ -318,6 +320,8 @@
 <p>
 	Сумма зарплат <?=$employe1->name ?> и <?=$employe2->name?> равна <?=$employe1->salary + $employe2->salary?>
 </p>
+<hr/>
+
 	<h2 class="text-center pt-2">Запись свойств</h2>
 	<p>
 		С помощью $this свойства можно не только прочитывать, но и записывать. Давайте сделаем метод setName(), который параметром будем принимать имя пользователя и записывать его в свойство name:
@@ -378,6 +382,7 @@
 	// 	public $age;
 	// }
 ?>
+<hr/>
 
 <h6>
 	8) Сделайте метод setAge, который параметром будет принимать новый возраст пользователя.
@@ -412,6 +417,7 @@
 	// }
 	// }
 ?>
+<hr/>
 
 <h6>
 	9) Создайте объект класса User с именем 'john' и возрастом 25. С помощью метода setAge поменяйте возраст на 30. Выведите новое значение возраста на экран.
@@ -460,6 +466,7 @@
 <p>
 	Возраст <?=$user->name?> : <?=$user->age?>
 </p>
+<hr/>
 
 <h6>
 	10) Модифицируйте метод setAge так, чтобы он вначале проверял, что переданный возраст больше или равен 18. Если это так - пусть метод меняет возраст пользователя, а если не так - то ничего не делает.
@@ -480,12 +487,17 @@
 			}
 		}
 	}
+	$user = new User2;
+	$user->name = "silver";
+	$user->setAge(80);
+	$user->setAge(17);
 ?>
+&lt;p>Возраст пользователя &lt;?=$user->name?> равен &lt;?=$user->age?>&lt;/p>
 	</pre>
 </code>
-<!-- <p>
+<p>
 	Результат:
-</p> -->
+</p>
 <?php
 	class User2 {
 		public $name;
@@ -497,14 +509,162 @@
 			}
 		}
 	}
+	$user = new User2;
+	$user->name = "silver";
+	$user->setAge(80);
+	$user->setAge(17);
 ?>
+<p>Возраст пользователя <?=$user->name?> равен <?=$user->age?></p>
+<hr/>
 
+<h6>
+	11) Сделайте класс Employee, в котором будут следующие свойства работника - name, salary. Сделайте метод doubleSalary, который текущую зарплату будет увеличивать в 2 раза.
+</h6>
+<p>
+	Решение:
+</p>
+<code>
+	<pre>
+&lt;?php
+	class Employee2 {
+		public $name;
+		public $salary;
+		public function doubleSalary()
+		{
+			$this->salary *= 2;
+		}
+	}
+	$emp = new Employee2;
+	$emp->name = 'lucky';
+	$emp->salary = 1000;
+	$emp->doubleSalary();
+?>
+&lt;p>Зарплата пользователя &lt;?=$emp->name?> равен &lt;?=$emp->salary?>&lt;/p>
+	</pre>
+</code>
+<p>
+	Результат:
+</p>
+<?php
+	class Employee2 {
+		public $name;
+		public $salary;
+		public function doubleSalary()
+		{
+			$this->salary *= 2;
+		}
+	}
+	$emp = new Employee2;
+	$emp->name = 'lucky';
+	$emp->salary = 1000;
+	$emp->doubleSalary();
+?>
+<p>Зарплата пользователя <?=$emp->name?> равен <?=$emp->salary?></p>
+<hr/>
 
+<h6>
+	12) Сделайте класс Rectangle, в котором в свойствах будут записаны ширина и высота прямоугольника.
+</h6>
+<p>
+	Решение:
+</p>
+<code>
+	<pre>
+&lt;?php
+	class Rectangle {
+	 	public $width;
+	 	public $height;
+	}
+?>
+	</pre>
+</code>
+<!-- <p>
+	Результат:
+</p> -->
+<?php
+	// class Rectangle {
+	// 	public $width;
+	// 	public $height;
+	// }
+?>
+<hr/>
+
+<h6>
+	13) В классе Rectangle сделайте метод getSquare, который будет возвращать площадь этого прямоугольника.
+</h6>
+<p>
+	Решение:
+</p>
+<code>
+	<pre>
+&lt;?php
+	class Rectangle {
+		public $width;
+		public $height;
+		public function getSquare(){
+			return $this->height * $this->width;
+		}
+	}
+?>
+	</pre>
+</code>
+<!-- <p>
+	Результат:
+</p> -->
+<?php
+	// class Rectangle {
+	// 	public $width;
+	// 	public $height;
+	// 	public function getSquare(){
+	// 		return $this->height * $this->width;
+	// 	}
+	// }
+?>
+<hr/>
+
+<h6>
+	14) В классе Rectangle сделайте метод getPerimeter, который будет возвращать периметр этого прямоугольника.
+</h6>
+<p>
+	Решение:
+</p>
+<code>
+	<pre>
+&lt;?php
+	class Rectangle {
+		public $width;
+		public $height;
+		public function getSquare(){
+			return $this->height * $this->width;
+		}
+		public function getPerimetr(){
+			return ($this->height + $this->width) * 2;
+		}
+	}
+?>
+	</pre>
+</code>
+<!-- <p>
+	Результат:
+</p> -->
+<?php
+	// class Rectangle {
+	// 	public $width;
+	// 	public $height;
+	// 	public function getSquare(){
+	// 		return $this->height * $this->width;
+	// 	}
+	// 	public function getPerimetr(){
+	// 		return ($this->height + $this->width) * 2;
+	// 	}
+	// }
+?>
+<hr/>
 
 
 
 <p class="text-center">
 	<a href="/page/oop/properties" class="p-2">Назад</a>
-	<a href="/page/oop/properties-and-this"  class="p-2">Далее</a>
+	<a href="/page/oop/methods-and-this"  class="p-2">Далее</a>
 </p>
 </main>
