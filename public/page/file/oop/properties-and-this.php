@@ -391,8 +391,9 @@
 	class User {
 		public $name;
 		public $age;
-		function setAge($num){
-			this->age = $num;
+		public function setAge($num)
+		{
+			$this->age = $num;
 		}
 	}
 ?>
@@ -405,11 +406,100 @@
 	// class User {
 	// 	public $name;
 	// 	public $age;
-	// 	function setAge($num){
-	// 	this->age = $num;
+	// 	public function setAge($num)
+	// {
+	// 	$this->age = $num;
 	// }
 	// }
 ?>
+
+<h6>
+	9) Создайте объект класса User с именем 'john' и возрастом 25. С помощью метода setAge поменяйте возраст на 30. Выведите новое значение возраста на экран.
+</h6>
+<p>
+	Решение:
+</p>
+<code>
+	<pre>
+&lt;?php
+	class User {
+		public $name;
+		public $age;
+		public function setAge($num)
+		{
+			$this->age = $num;
+		}
+	}
+	$user = new User;
+	$user->name = 'john';
+	$user->age = 25;
+	$user->setAge(30);
+?>
+&lt;p>
+	Возраст &lt;?=$user->name?> : &lt;?=$user->age?>
+&lt;/p>
+	</pre>
+</code>
+<p>
+	Результат:
+</p>
+<?php
+	class User {
+		public $name;
+		public $age;
+		public function setAge($num)
+		{
+			$this->age = $num;
+		}
+	}
+	$user = new User;
+	$user->name = 'john';
+	$user->age = 25;
+	$user->setAge(30);
+?>
+<p>
+	Возраст <?=$user->name?> : <?=$user->age?>
+</p>
+
+<h6>
+	10) Модифицируйте метод setAge так, чтобы он вначале проверял, что переданный возраст больше или равен 18. Если это так - пусть метод меняет возраст пользователя, а если не так - то ничего не делает.
+</h6>
+<p>
+	Решение:
+</p>
+<code>
+	<pre>
+&lt;?php
+	class User {
+		public $name;
+		public $age;
+		public function setAge($num)
+		{
+			if($num >= 18) {
+			$this->age = $num;
+			}
+		}
+	}
+?>
+	</pre>
+</code>
+<!-- <p>
+	Результат:
+</p> -->
+<?php
+	class User2 {
+		public $name;
+		public $age;
+		public function setAge($num)
+		{
+			if($num >= 18) {
+				$this->age = $num;
+			}
+		}
+	}
+?>
+
+
 
 
 
