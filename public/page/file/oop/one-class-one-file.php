@@ -42,22 +42,57 @@ $user = new User; // это вызовет ошибку
 </p>
 <code>
 	<pre>
+		//file:classes/ColorRect.php
 &lt;?php
-	class Employee {
-		private $name;
-		private $age;
-		private $salary;
+class ColorRect {
+	private $width;
+	private $height;
+	private $color;
+
+	public function __construct($color, $width, $height){
+		$this->color = $color;
+		$this->width = $width;
+		$this->height = $height;
 	}
+
+	public function getColorRect($text){
+		return '&lt;div style="width:'.$this->getWidth().'; height:'.
+		$this->getHeight().'; background:'.$this->color.';display:
+		flex; justify-content:center; align-items:center">'.$text.
+		'&lt;/div>';
+	}
+	private function getWidth(){
+		return $this->width.'px';
+	}
+	private function getHeight(){
+		return $this->height.'px';
+	}
+}
+?>
+
+
+		//file:index.php
+&lt;?php
+require_once('classes/ColorRect.php');
+
+$red100x50 = new ColorRect('red',100,50);
+echo $red100x50->getColorRect('Привет');
+
+$blue150x40 = new ColorRect('blue',150,40);
+echo $blue150x40->getColorRect('Hello');
 ?>
 	</pre>
 </code>
-<!-- <p>
+<p>
 	Результат:
-</p> -->
+</p>
 <?php
-require_once('classes/Tags.php');
-$tagP1 = new Tags('Приветы');
-echo $tagP1->getTextInTag('p');
+require_once('classes/ColorRect.php');
+$red100x50 = new ColorRect('red',100,50);
+echo $red100x50->getColorRect('Привет');
+
+$blue150x40 = new ColorRect('blue',150,40);
+echo $blue150x40->getColorRect('Hello');
 ?>
 <hr/>
 
@@ -65,6 +100,6 @@ echo $tagP1->getTextInTag('p');
 
 <p class="text-center">
 	<a href="/page/oop/read-only-properties" class="p-2">Назад</a>
-	<a href="/page/oop/"  class="p-2">Далее</a>
+	<a href="/page/oop/objects-in-array"  class="p-2">Далее</a>
 </p>
 </main>
