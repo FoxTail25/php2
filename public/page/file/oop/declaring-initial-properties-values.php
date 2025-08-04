@@ -223,7 +223,19 @@
 <code>
 	<pre>
 &lt;?php
+class Arr {
+	private $numbers=[];
 
+	public function add($arrNum){
+		$this->numbers = array_merge($this->numbers, $arrNum);
+	}
+	public function getSum(){
+		return array_sum($this->numbers);
+	}
+}
+$arr = new Arr;
+$arr->add([1,2,3]);
+echo $arr->getSum();
 ?>
 	</pre>
 </code>
@@ -235,11 +247,68 @@ class Arr {
 	private $numbers=[];
 
 	public function add($arrNum){
-		
+		$this->numbers = array_merge($this->numbers, $arrNum);
 	}
-
+	public function getSum(){
+		return array_sum($this->numbers);
+	}
 }
+$arr = new Arr;
+$arr->add([1,2,3]);
+echo $arr->getSum();
 ?>
+<hr/>
+<h6>
+	2) Реализуйте также метод getAvg, который будет находить среднее арифметическое чисел.
+</h6>
+<p>
+	Решение:
+</p>
+<code>
+	<pre>
+&lt;?php
+class Arr {
+	private $numbers=[];
+
+	public function add($arrNum){
+		$this->numbers = array_merge($this->numbers, $arrNum);
+	}
+	public function getSum(){
+		return array_sum($this->numbers);
+	}
+	public function getAvg(){
+		return array_sum($this->numbers)/count($this->numbers);
+	}
+}
+$arr = new Arr2;
+$arr->add([1,2,3]);
+?>
+&lt;p>Сумма элементов: &lt;?=$arr->getSum();?> &lt;/p> 
+&lt;p>Среднее арифметическое элементов: &lt;?=$arr->getAvg();?> &lt;/p> 
+	</pre>
+</code>
+<p>
+	Результат:
+</p>
+<?php
+class Arr2 {
+	private $numbers=[];
+
+	public function add($arrNum){
+		$this->numbers = array_merge($this->numbers, $arrNum);
+	}
+	public function getSum(){
+		return array_sum($this->numbers);
+	}
+		public function getAvg(){
+		return array_sum($this->numbers)/count($this->numbers);
+	}
+}
+$arr = new Arr2;
+$arr->add([1,2,3]);
+?>
+<p>Сумма элементов: <?=$arr->getSum();?> </p> 
+<p>Среднее арифметическое элементов: <?=$arr->getAvg();?> </p> 
 <hr/>
 
 
