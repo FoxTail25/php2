@@ -237,6 +237,7 @@ $arr = new Arr;
 $arr->add([1,2,3]);
 echo $arr->getSum();
 ?>
+&lt;p>Сумма элементов: &lt;?=$arr->getSum();?> &lt;/p> 
 	</pre>
 </code>
 <p>
@@ -255,8 +256,8 @@ class Arr {
 }
 $arr = new Arr;
 $arr->add([1,2,3]);
-echo $arr->getSum();
 ?>
+<p>Сумма элементов: <?=$arr->getSum();?> </p> 
 <hr/>
 <h6>
 	2) Реализуйте также метод getAvg, который будет находить среднее арифметическое чисел.
