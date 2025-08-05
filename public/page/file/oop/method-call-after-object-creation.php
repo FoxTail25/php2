@@ -76,3 +76,52 @@ echo (new Arr([1, 2, 3]))->getSum(); // выведет 6
 ?>
 </pre>
 </code>
+<h5 class="text-center">Задачи</h5>
+
+<h6>
+	1) Не подсматривая в мой код реализуйте такой же класс Arr и вызовите его метод getSum сразу после создания объекта.
+</h6>
+<p>
+	Решение:
+</p>
+<code>
+	<pre>
+&lt;?php
+	class Arr {
+		private $numbers;
+
+		public function __construct($num){
+			$this->numbers = $num;
+		}
+		public function getSum(){
+			return array_sum($this->numbers);
+		}
+	}
+?>
+&lt;p>Сумма 1,2,3 = &lt;?= (new Arr([1,2,3]))->getSum()?>&lt;/p>
+?>
+	</pre>
+</code>
+<p>
+	Результат:
+</p>
+<?php
+	class Arr {
+		private $numbers;
+
+		public function __construct($num){
+			$this->numbers = $num;
+		}
+		public function getSum(){
+			return array_sum($this->numbers);
+		}
+	}
+?>
+<p>Сумма 1,2,3 = <?= (new Arr([1,2,3]))->getSum()?></p>
+<hr/>
+
+<p class="text-center">
+	<a href="/page/oop/" class="p-2">Назад</a>
+	<a href="/page/oop/methods-chains"  class="p-2">Далее</a>
+</p>
+</main>
