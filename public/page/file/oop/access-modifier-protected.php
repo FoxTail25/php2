@@ -145,9 +145,42 @@
 <code>
 	<pre>
 &lt;?php
+class User {
+	private $name;
+	protected $age;
 
+	public function setAge($newAge){
+		if($newAge>=1 and $newAge <=100){
+			$this->age = $newAge;
+		}
+	}
+	public function getAge(){
+		return $this->age;
+	}
+	public function setName($newName){
+			$this->name = $newName;
+	}
+	public function getName(){
+		return $this->name;
+	}
+}
+
+class Student extends User {
+	private $course;
+
+	public function setCourse($newCourse) {
+		if($newCourse >=1 and $newCourse<=5) {
+			$this->course = $newCourse;
+		}
+	}
+	public function getCourse(){
+		return $this->course;
+	}
+	public function AddOneYear(){
+		$this->age++;
+	}
+}
 ?>
-&lt;p>Сумма элементов: &lt;?=$arr->getSum();?> &lt;/p> 
 	</pre>
 </code>
 <p>
@@ -191,22 +224,10 @@ class Student extends User {
 }
 
 ?>
-<p>Сумма элементов: <?=$arr->getSum();?> </p> 
 <hr/>
 
-
-
-
-
-
-
-
-
-
-
-
 <p class="text-center">
-	<a href="/page/oop/class-as-methods-set" class="p-2">Назад</a>
-	<a href="/page/oop/access-modifier-protected"  class="p-2">Далее</a>
+	<a href="/page/oop/classes-inheritance" class="p-2">Назад</a>
+	<a href="/page/oop/overriding-of-parent-methods"  class="p-2">Далее</a>
 </p>
 </main>

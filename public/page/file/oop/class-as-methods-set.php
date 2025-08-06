@@ -424,6 +424,6 @@
 
 <p class="text-center">
 	<a href="/page/oop/methods-chains" class="p-2">Назад</a>
-	<a href="/page/oop/classes-inheritance"  class="p-2">Далее</a>
+	<a href="/page/oop/access-modifier-protected"  class="p-2">Далее</a>
 </p>
 </main>
