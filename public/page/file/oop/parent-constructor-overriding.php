@@ -136,9 +136,8 @@ $student = new Student('john', 19, 2); // это пока не работает
 </p>
 
 <h5 class="text-center">Задачи</h5>
-
 <h6>
-Не подсматривая в мой код реализуйте такой же класс Student, наследующий от User.
+1) Не подсматривая в мой код реализуйте такой же класс Student, наследующий от User.
 </h6>
 <p>
 	Решение:
@@ -224,10 +223,226 @@ $stud1 = new Student('max',20, 1);
 	Курс: <?=$stud1->getCours()?>
 </p>
 <hr/>
+<h5 class="text-center">Используем конструктор родителя</h5>
+<p>
+Понятно, что дублирование кода родителя в классе потомке - это не очень хорошо. Давайте вместо дублирования кода в конструкторе потомка вызовем конструктор родителя.
 
+Для полной ясности распишу все по шагам. Вот так выглядит конструктор класса User, он принимает два параметра $name и $age и записывает их в соответствующие свойства:
+</p>
+<code>
+	<pre>
+&lt;?php
+			// Конструктор объекта класса User:
+public function __construct($name, $age)
+{
+	$this->name = $name;
+	$this->age  = $age;
+}
+?>
+	</pre>
+</code>
+<p>
+	Вот конструктор класса Student, который мы хотим переписать:
+</p>
+<code>
+	<pre>
+&lt;?php
+// Конструктор объекта класса Student:
+public function __construct($name, $age, $course)
+{
+	// Этот код хотим заменить на вызов конструктора родителя:
+	$this->name = $name;
+	$this->age  = $age;
+	
+	// Наш код:
+	$this->course = $course;
+}
+?>
+	</pre>
+</code>
+<p>
+	Конструктор родителя можно вызвать внутри потомка с помощью parent. При этом конструктор родителя первым параметром ожидает имя, а вторым - возраст, и мы должны ему их передать, вот так:
+</p>
+<code>
+	<pre>
+&lt;?php
+	// Конструктор объекта класса Student:
+	public function __construct($name, $age, $course)
+	{
+		// Вызовем конструктор родителя, передав ему два параметра:
+		parent::__construct($name, $age);
+			
+		// Запишем свойство course:
+		$this->course = $course;
+	}
+?>
+	</pre>
+</code>
+<p>
+	Напишем полный код класса Student:
+</p>
+<code>
+	<pre>
+&lt;?php
+	class Student extends User
+	{
+		private $course;
+		
+		// Конструктор объекта:
+		public function __construct($name, $age, $course)
+		{
+			parent::__construct($name, $age); // вызываем конструктор родителя
+			$this->course = $course;
+		}
+		
+		public function getCourse()
+		{
+			return $this->course;
+		}
+	}
+?>
+	</pre>
+</code>
+<p>
+	Проверим, что все работает:
+</p>
+<code>
+	<pre>
+&lt;?php
+	$student = new Student('john', 19, 2);
+	
+	echo $student->getName();   // выведет 'john'
+	echo $student->getAge();    // выведет 19
+	echo $student->getCourse(); // выведет 2
+?>
+	</pre>
+</code>
+<p>
+	Так как класс Student теперь не обращается напрямую к свойствам name и age родителя, можно их опять сделать приватными:
+</p>
+<code>
+	<pre>
+&lt;?php
+	class User
+	{
+		private $name; // объявим свойство приватным
+		private $age;  // объявим свойство приватным
+		
+		public function __construct($name, $age)
+		{
+			$this->name = $name;
+			$this->age  = $age;
+		}
+		
+		public function getName()
+		{
+			return $this->name;
+		}
+		
+		public function getAge()
+		{
+			return $this->age;
+		}
+	}
+?>
+	</pre>
+</code>
+<h6>
+2) Сделайте класс User, в котором будут следующие свойства только для чтения: name и surname. Начальные значения этих свойств должны устанавливаться в конструкторе. Сделайте также геттеры этих свойств.
+</h6>
+<p>
+	Решение:
+</p>
+<code>
+	<pre>
+&lt;?php
+class User {
+	private $name;
+	private $age;
 
+	public function __construct($name, $age){
+		$this->name = $name;
+		$this->age = $age;
+	}
+	public function getName(){
+		return $this->name;
+	}
+	public function getAge(){
+		return $this->age;
+	}
+}
+?>
+	</pre>
+</code>
+<!-- <p>
+	Результат:
+</p> -->
+<?php
+class User {
+	private $name;
+	private $age;
 
+	public function __construct($name, $age){
+		$this->name = $name;
+		$this->age = $age;
+	}
+	public function getName(){
+		return $this->name;
+	}
+	public function getAge(){
+		return $this->age;
+	}
+}
+?>
+<hr/>
+<h6>
+3) Модифицируйте предыдущую задачу так, чтобы третьим параметром в конструктор передавалась дата рождения работника в формате год-месяц-день. Запишите ее в свойство birthday. Сделайте геттер для этого свойства.
+</h6>
+<p>
+	Решение:
+</p>
+<code>
+	<pre>
+&lt;?php
+class User {
+	protected $name;
+	protected $age;
 
+	public function __construct($name, $age){
+		$this->name = $name;
+		$this->age = $age;
+	}
+	public function getName(){
+		return $this->name;
+	}
+	public function getAge(){
+		return $this->age;
+	}
+}
+?>
+	</pre>
+</code>
+<!-- <p>
+	Результат:
+</p> -->
+<?php
+class User {
+	protected $name;
+	protected $age;
+
+	public function __construct($name, $age){
+		$this->name = $name;
+		$this->age = $age;
+	}
+	public function getName(){
+		return $this->name;
+	}
+	public function getAge(){
+		return $this->age;
+	}
+}
+?>
+<hr/>
 
 
 

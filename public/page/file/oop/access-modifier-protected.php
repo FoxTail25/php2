@@ -183,9 +183,9 @@ class Student extends User {
 ?>
 	</pre>
 </code>
-<p>
+<!-- <p>
 	Результат:
-</p>
+</p> -->
 <?php
 class User {
 	private $name;
@@ -206,7 +206,6 @@ class User {
 		return $this->name;
 	}
 }
-
 class Student extends User {
 	private $course;
 
@@ -222,9 +221,10 @@ class Student extends User {
 		$this->age++;
 	}
 }
-
 ?>
 <hr/>
+
+
 
 <p class="text-center">
 	<a href="/page/oop/classes-inheritance" class="p-2">Назад</a>
