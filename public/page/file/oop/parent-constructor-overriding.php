@@ -358,17 +358,17 @@ public function __construct($name, $age, $course)
 &lt;?php
 class User {
 	private $name;
-	private $age;
+	private $surname;
 
-	public function __construct($name, $age){
+	public function __construct($name, $surname){
 		$this->name = $name;
-		$this->age = $age;
+		$this->surname = $surname;
 	}
 	public function getName(){
 		return $this->name;
 	}
-	public function getAge(){
-		return $this->age;
+	public function getSurname(){
+		return $this->surname;
 	}
 }
 ?>
@@ -378,19 +378,19 @@ class User {
 	Результат:
 </p> -->
 <?php
-class User {
+class User2 {
 	private $name;
-	private $age;
+	private $surname;
 
-	public function __construct($name, $age){
+	public function __construct($name, $surname){
 		$this->name = $name;
-		$this->age = $age;
+		$this->surname = $surname;
 	}
 	public function getName(){
 		return $this->name;
 	}
-	public function getAge(){
-		return $this->age;
+	public function getSurname(){
+		return $this->surname;
 	}
 }
 ?>
@@ -405,15 +405,164 @@ class User {
 	<pre>
 &lt;?php
 class User {
-	protected $name;
-	protected $age;
+	private $name;
+	private $surname;
+	private $birthday;
+	
 
-	public function __construct($name, $age){
+	public function __construct($name, $surname, $birthday){
 		$this->name = $name;
-		$this->age = $age;
+		$this->surname = $surname;
+		$this->birthday = $birthday;
 	}
 	public function getName(){
 		return $this->name;
+	}
+	public function getSurname(){
+		return $this->surname;
+	}
+	public function getBirthday(){
+		return $this->birthday;
+	}
+}
+?>
+	</pre>
+</code>
+<!-- <p>
+	Результат:
+</p> -->
+<?php
+class User3 {
+	private $name;
+	private $surname;
+	private $birthday;
+	
+
+	public function __construct($name, $surname, $birthday){
+		$this->name = $name;
+		$this->surname = $surname;
+		$this->birthday = $birthday; // приходит в формате год-месяц-день.
+	}
+	public function getName(){
+		return $this->name;
+	}
+	public function getSurname(){
+		return $this->surname;
+	}
+	public function getBirthday(){
+		return $this->birthday;
+	}
+}
+?>
+<hr/>
+<h6>
+4) Модифицируйте предыдущую задачу так, чтобы был приватный метод calculateAge, который параметром будет принимать дату рождения, а возвращать возраст с учетом того, был ли уже день рождения в этом году, или нет.
+</h6>
+<p>
+	Решение:
+</p>
+<code>
+	<pre>
+&lt;?php
+class User {
+	private $name;
+	private $surname;
+	private $birthday;
+	
+
+	public function __construct($name, $surname, $birthday){
+		$this->name = $name;
+		$this->surname = $surname;
+		$this->birthday = $birthday;
+	}
+	public function getName(){
+		return $this->name;
+	}
+	public function getSurname(){
+		return $this->surname;
+	}
+	public function getBirthday(){
+		return $this->birthday;
+	}
+	private function calculateAge(){
+		$birthdayTimeStamp = strtotime($this->birthday);
+		$timeDiff = $birthdayTimeStamp - time();
+		$secondsInYear = 31536000;
+		return $timeDiff / $secondsInYear;
+	}
+}
+?>
+	</pre>
+</code>
+<!-- <p>
+	Результат:
+</p> -->
+<?php
+class User4 {
+	private $name;
+	private $surname;
+	private $birthday;
+	
+
+	public function __construct($name, $surname, $birthday){
+		$this->name = $name;
+		$this->surname = $surname;
+		$this->birthday = $birthday; // приходит в формате год-месяц-день.
+	}
+	public function getName(){
+		return $this->name;
+	}
+	public function getSurname(){
+		return $this->surname;
+	}
+	public function getBirthday(){
+		return $this->birthday;
+	}
+	private function calculateAge(){
+		$birthdayTimeStamp = strtotime($this->birthday);
+		$timeDiff = $birthdayTimeStamp - time();
+		$secondsInYear = 31536000;
+		return $timeDiff / $secondsInYear;
+	}
+}
+?>
+<hr/>
+<h6>
+5) Модифицируйте предыдущую задачу так, чтобы метод calculateAge вызывался в конструкторе объекта, рассчитывал возраст пользователя и записывал его в приватное свойство age. Сделайте геттер для этого свойства.
+</h6>
+<p>
+	Решение:
+</p>
+<code>
+	<pre>
+&lt;?php
+class User{
+	private $name;
+	private $surname;
+	private $birthday;
+	private $age;
+	
+
+	public function __construct($name, $surname, $birthday){
+		$this->name = $name;
+		$this->surname = $surname;
+		$this->birthday = $birthday; // приходит в формате год-месяц-день.
+		$this->age = $this->calculateAge();
+	}
+	public function getName(){
+		return $this->name;
+	}
+	public function getSurname(){
+		return $this->surname;
+	}
+	public function getBirthday(){
+		return $this->birthday;
+	}
+	private function calculateAge(){
+		$birthdayTimeStamp = strtotime($this->birthday);
+		$timeDiff = $birthdayTimeStamp - time();
+		$secondsInYear = 31536000;
+		return $timeDiff / $secondsInYear;
 	}
 	public function getAge(){
 		return $this->age;
@@ -426,21 +575,152 @@ class User {
 	Результат:
 </p> -->
 <?php
-class User {
-	protected $name;
-	protected $age;
+class User5 {
+	private $name;
+	private $surname;
+	private $birthday;
+	private $age;
+	
 
-	public function __construct($name, $age){
+	public function __construct($name, $surname, $birthday){
 		$this->name = $name;
-		$this->age = $age;
+		$this->surname = $surname;
+		$this->birthday = $birthday; // приходит в формате год-месяц-день.
+		$this->age = $this->calculateAge();
 	}
 	public function getName(){
 		return $this->name;
+	}
+	public function getSurname(){
+		return $this->surname;
+	}
+	public function getBirthday(){
+		return $this->birthday;
+	}
+	private function calculateAge(){
+		$birthdayTimeStamp = strtotime($this->birthday);
+		$timeDiff = $birthdayTimeStamp - time();
+		$secondsInYear = 31536000;
+		return $timeDiff / $secondsInYear;
 	}
 	public function getAge(){
 		return $this->age;
 	}
 }
+?>
+<h6>
+6) Сделайте класс Employee, который будет наследовать от класса User. Пусть новый класс имеет свойство salary, в котором будет хранится зарплата работника. Зарплата должна передаваться четвертым параметром в конструктор объекта. Сделайте также геттер для этого свойства.
+</h6>
+<p>
+	Решение:
+</p>
+<code>
+	<pre>
+&lt;?php
+class User6 {
+	private $name;
+	private $surname;
+	private $birthday;
+	private $age;
+	
+
+	public function __construct($name, $surname, $birthday){
+		$this->name = $name;
+		$this->surname = $surname;
+		$this->birthday = $birthday; // приходит в формате год-месяц-день.
+		$this->age = $this->calculateAge();
+	}
+	public function getName(){
+		return $this->name;
+	}
+	public function getSurname(){
+		return $this->surname;
+	}
+	public function getBirthday(){
+		return $this->birthday;
+	}
+	private function calculateAge(){
+		$birthdayTimeStamp = strtotime($this->birthday);
+		$timeDiff = $birthdayTimeStamp - time();
+		$secondsInYear = 31536000;
+		return $timeDiff / $secondsInYear;
+	}
+	public function getAge(){
+		return $this->age;
+	}
+}
+
+class Employee extends User6{
+	private $salary;
+
+	public function __constract($name, $surname, $birthday, $salary) {
+		parent:: __constract($name, $surname, $birthday);
+		$this->salary = $salary;
+	}
+	public function getSalary(){
+		return $this->salary;
+	}
+}
+$emp1 = new Employee('john', 'bertoff', '1980-1-15', 2000);
+echo $emp1->getAge();
+echo '&lt;br/>';
+echo $emp1->getSalary();
+?>
+	</pre>
+</code>
+<!-- <p>
+	Результат:
+</p> -->
+<?php
+class User6 {
+	private $name;
+	private $surname;
+	private $birthday;
+	private $age;
+	
+
+	public function __construct($name, $surname, $birthday){
+		$this->name = $name;
+		$this->surname = $surname;
+		$this->birthday = $birthday; // приходит в формате год-месяц-день.
+		$this->age = $this->calculateAge();
+	}
+	public function getName(){
+		return $this->name;
+	}
+	public function getSurname(){
+		return $this->surname;
+	}
+	public function getBirthday(){
+		return $this->birthday;
+	}
+	private function calculateAge(){
+		$birthdayTimeStamp = strtotime($this->birthday);
+		$timeDiff = time() - $birthdayTimeStamp;
+		// $secondsInYear = 31536000;
+		$secondsInYear = 60 * 60 * 24 * 365;
+		return floor($timeDiff / $secondsInYear);
+	}
+	public function getAge(){
+		return $this->age;
+	}
+}
+
+class Employee extends User6{
+	private $salary;
+
+	public function __construct($name, $surname, $birthday, $salary) {
+		parent:: __construct($name, $surname, $birthday);
+		$this->salary = $salary;
+	}
+	public function getSalary(){
+		return $this->salary;
+	}
+}
+$emp1 = new Employee('john', 'bertoff', '1980-1-15', 2000);
+echo $emp1->getAge();
+echo '<br/>';
+echo $emp1->getSalary();
 ?>
 <hr/>
 
