@@ -129,7 +129,7 @@ class Product {
 ?>
 <hr/>
 <h6>
-	1) Создайте объект класса Product, запишите его в переменную $product1.
+	2) Создайте объект класса Product, запишите его в переменную $product1.
 </h6>
 <p>
 	Решение:
@@ -148,3 +148,38 @@ $product1 = new Product;
 $product1 = new Product;
 ?>
 <hr/>
+<h6>
+	3) Присвойте значение переменной $product1 в переменную $product2. Проверьте то, что обе переменные ссылаются на один и тот же объект.
+</h6>
+<p>
+	Решение:
+</p>
+<code>
+	<pre>
+&lt;?php
+$product2 = $product1;
+echo $product1 instanceof Product;
+echo '&lt;br/>';
+echo $product2 instanceof Product;
+?>
+</pre>
+</code>
+<!-- <p>
+	Результат:
+</p> -->
+<?php
+$product2 = $product1;
+echo $product1 instanceof Product;
+echo '<br/>';
+echo $product2 instanceof Product;
+?>
+<hr/>
+
+
+
+
+<p class="text-center">
+	<a href="/page/oop/parent-constructor-overriding" class="p-2">Назад</a>
+	<a href="/page/oop/using-objects-in-class"  class="p-2">Далее</a>
+</p>
+</main>
