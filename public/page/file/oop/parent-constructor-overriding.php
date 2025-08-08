@@ -729,6 +729,6 @@ echo $emp1->getSalary();
 
 <p class="text-center">
 	<a href="/page/oop/overriding-of-parent-methods" class="p-2">Назад</a>
-	<a href="/page/oop/parent-constructor-overriding"  class="p-2">Далее</a>
+	<a href="/page/oop/passing-objects-by-reference"  class="p-2">Далее</a>
 </p>
 </main>
