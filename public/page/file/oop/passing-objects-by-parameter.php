@@ -144,7 +144,7 @@
 <h5 class="text-center">Задачи</h5>
 
 <h6>
-	1) Самостоятельно повторите описанные мною классы Arr и SumHelper.
+	1) Сделайте класс Product, в котором будут приватные свойства name, price и quantity. Пусть все эти свойства будут доступны только для чтения.
 </h6>
 <p>
 	Решение:
@@ -152,44 +152,21 @@
 <code>
 	<pre>
 &lt;?php
-class SumHelper {
-	public function getSum2($arr) {
-		return $this->getSum($arr, 2);
+class Product {
+	private $name;
+	private $price;
+	private $quantity;
+	
+	public function getName(){
+		return $this->name;
 	}
-	public function getSum3($arr) {
-		return $this->getSum($arr, 3);
+	public function getPrice(){
+		return $this->price;
 	}
-	private function getSum($arr, $pow){
-		$sum = 0;
-		foreach($arr as $num) {
-			$sum += $num**$pow;
-		}
-		return $sum;
-	}
-}
-class Arr {
-	private $numbers = [];
-	private $sumHelper;
-
-		public function __construct(){
-			$this->sumHelper = new SumHelper;
-		}
-	public function addNumber($num){
-		$this->numbers[] = $num;
-	}
-	public function getArrSum2(){
-		return $this->sumHelper->getSum2($this->numbers);
-	}
-	public function getArrSum3(){
-		return $this->sumHelper->getSum3($this->numbers);
+	public function getQuantity(){
+		return $this->quantity;
 	}
 }
-$arr = new Arr;
-$arr->addNumber(2);
-$arr->addNumber(3);
-echo $arr->getArrSum2();
-echo '&lt;br/>';
-echo $arr->getArrSum3();
 ?>
 </pre>
 </code>
@@ -197,48 +174,25 @@ echo $arr->getArrSum3();
 	Результат:
 </p>
 <?php
-class SumHelper {
-	public function getSum2($arr) {
-		return $this->getSum($arr, 2);
-	}
-	public function getSum3($arr) {
-		return $this->getSum($arr, 3);
-	}
-	private function getSum($arr, $pow){
-		$sum = 0;
-		foreach($arr as $num) {
-			$sum += $num**$pow;
-		}
-		return $sum;
-	}
-}
-class Arr {
-	private $numbers = [];
-	private $sumHelper;
+// class Product {
+// 	private $name;
+// 	private $price;
+// 	private $quantity;
 
-		public function __construct(){
-			$this->sumHelper = new SumHelper;
-		}
-	public function addNumber($num){
-		$this->numbers[] = $num;
-	}
-	public function getArrSum2(){
-		return $this->sumHelper->getSum2($this->numbers);
-	}
-	public function getArrSum3(){
-		return $this->sumHelper->getSum3($this->numbers);
-	}
-}
-$arr = new Arr;
-$arr->addNumber(2);
-$arr->addNumber(3);
-echo $arr->getArrSum2();
-echo '<br/>';
-echo $arr->getArrSum3();
+// 	public function getName(){
+// 		return $this->name;
+// 	}
+// 	public function getPrice(){
+// 		return $this->price;
+// 	}
+// 	public function getQuantity(){
+// 		return $this->quantity;
+// 	}
+// }
 ?>
 <hr/>
 <h6>
-	2) Создайте класс AvgHelper с методом getAvg, который параметром будет принимать массив и возвращать среднее арифметическое этого массива (сумма элементов делить на количество).
+	2) Добавьте в класс Product метод getCost, который будет находить полную стоимость продукта (сумма умножить на количество).
 </h6>
 <p>
 	Решение:
@@ -246,32 +200,53 @@ echo $arr->getArrSum3();
 <code>
 	<pre>
 &lt;?php
-class AvgHelper {
-	public function getAvg($arr){
-		return array_sum($arr) / count($arr);
+class Product {
+	private $name;
+	private $price;
+	private $quantity;
+	
+	public function getName(){
+		return $this->name;
+	}
+	public function getPrice(){
+		return $this->price;
+	}
+	public function getQuantity(){
+		return $this->quantity;
+	}
+	public function getCost(){
+		return $this->price * $this->quantity;
 	}
 }
-echo (new AvgHelper)->getAvg([1,2,3])
-?>	</pre>
-</code>
-<p>
-	Результат:
-</p>
-<code>
-	<pre>
-<?php
-class AvgHelper1 {
-	public function getAvg($arr){
-		return array_sum($arr) / count($arr);
-	}
-}
-echo (new AvgHelper1)->getAvg([1,2,3])
 ?>
-	</pre>
+</pre>
 </code>
+<!-- <p>
+	Результат:
+</p> -->
+<?php
+class Product {
+	private $name;
+	private $price;
+	private $quantity;
+
+	public function getName(){
+		return $this->name;
+	}
+	public function getPrice(){
+		return $this->price;
+	}
+	public function getQuantity(){
+		return $this->quantity;
+	}
+	public function getCost(){
+		return $this->price * $this->quantity;
+	}
+}
+?>
 <hr/>
 <h6>
-	3) Добавьте в класс AvgHelper еще и метод getMeanSquare, который параметром будет принимать массив и возвращать среднее квадратичное этого массива (квадратный корень, извлеченный из суммы квадратов элементов, деленной на количество).
+	3) Сделайте класс Cart. Данный класс будет хранить список продуктов (объектов класса Product) в виде массива. Пусть продукты хранятся в свойстве products.
 </h6>
 <p>
 	Решение:
@@ -279,48 +254,23 @@ echo (new AvgHelper1)->getAvg([1,2,3])
 <code>
 	<pre>
 &lt;?php
-class AvgHelper {
-	private $sumHelper;
-
-	public function __construct(){
-		$this->sumHelper = new SumHelper;
-	}
-	public function getAvg($arr){
-		return array_sum($arr) / count($arr);
-	}
-	public function getMeanSquare($arr){
-		return sqrt($this->sumHelper->getSum2($arr) / count($arr));
-	}
+class Cart {
+	private $products = [];
 }
-echo (new AvgHelper)->getMeanSquare([1,2,3])
-?>	</pre>
-</code>
-<p>
-	Результат:
-</p>
-<code>
-	<pre>
-<?php
-class AvgHelper2 {
-	private $sumHelper;
-
-	public function __construct(){
-		$this->sumHelper = new SumHelper;
-	}
-	public function getAvg($arr){
-		return array_sum($arr) / count($arr);
-	}
-	public function getMeanSquare($arr){
-		return sqrt($this->sumHelper->getSum2($arr) / count($arr));
-	}
-}
-echo (new AvgHelper2)->getMeanSquare([1,2,3]);
 ?>
-	</pre>
+</pre>
 </code>
+<!-- <p>
+	Результат:
+</p> -->
+<?php
+// class Cart {
+// 	private $products = [];
+// }
+?>
 <hr/>
 <h6>
-	4) Добавьте в класс Arr метод getAvgMeanSum, который будет находить сумму среднего арифметического и среднего квадратичного из массива $this->nums.
+	4) Реализуйте в классе Cart метод add для добавления продуктов.
 </h6>
 <p>
 	Решение:
@@ -328,50 +278,28 @@ echo (new AvgHelper2)->getMeanSquare([1,2,3]);
 <code>
 	<pre>
 &lt;?php
-class AvgHelper {
-	private $sumHelper;
-
-	public function __construct(){
-		$this->sumHelper = new SumHelper;
-	}
-	public function getAvg($arr){
-		return array_sum($arr) / count($arr);
-	}
-	public function getMeanSquare($arr){
-		return sqrt($this->sumHelper->getSum2($arr) / count($arr));
-	}
-	public function getAvgMeanSum($arr){
-		return $this->getMeanSquare($arr) + $this->getAvg($arr);
+class Cart {
+	private $products = [];
+	
+	public function addProduct($product){
+		$this->products[] = $product;
 	}
 }
-echo (new AvgHelper)->getAvgMeanSum([1,2,3]);
-?>	</pre>
+?>
+</pre>
 </code>
-<p>
+<!-- <p>
 	Результат:
-</p>
-<code>
-	<pre>
+</p> -->
 <?php
-class AvgHelper3 {
-	private $sumHelper;
+class Cart {
+	private $products = [];
 
-	public function __construct(){
-		$this->sumHelper = new SumHelper;
-	}
-	public function getAvg($arr){
-		return array_sum($arr) / count($arr);
-	}
-	public function getMeanSquare($arr){
-		return sqrt($this->sumHelper->getSum2($arr) / count($arr));
-	}
-	public function getAvgMeanSum($arr){
-		return $this->getMeanSquare($arr) + $this->getAvg($arr);
+	public function addProduct($product){
+		$this->products[] = $product;
 	}
 }
-echo (new AvgHelper3)->getAvgMeanSum([1,2,3]);
-?> </pre>
-</code>
+?>
 <hr/>
 
 
