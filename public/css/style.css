@@ -27,3 +27,9 @@ th {
 	padding: 0 6px;
 	text-align: center;
 }
+.task{
+	border: 1px solid black;
+	border-radius:10px;
+	padding: 10px;
+	margin-top: 10px;
+}
