@@ -532,7 +532,6 @@ class Cart {
 <hr/>
 
 
-
 <p class="text-center">
 	<a href="/page/oop/using-objects-in-class" class="p-2">Назад</a>
 	<a href="/page/oop/objects-comparison"  class="p-2">Далее</a>
