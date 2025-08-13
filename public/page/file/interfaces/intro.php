@@ -13,12 +13,147 @@
 	Интерфейсы объявляются так же, как и обычные классы, но используя ключевое слово interface вместо слова class.
 	Для наследования от интерфейсов используется немного другая терминология: говорят, что классы не наследуют от интерфейсов, а реализуют их. Соответственно вместо слова extends следует использовать ключевое слово implements.
 </p>
+<hr>
+<p class="bg-secondary-subtle p-3">
+	Нельзя создать объект интерфейса. Все методы интерфейса должны быть объявлены как public и не должны иметь реализации. У интерфейса могут быть только методы, но не свойства. Нельзя также сделать интерфейс и класс с одним и тем же названием.
+</p>
+<hr>
+<h5 class="text-center mt-3">
+	Попробуем на практике
+</h5>
+<p>
+Давайте попробуем на практике. Решим задачу на фигуры из предыдущего рока, но уже используя интерфейсы, а не абстрактные классы.
 
-<!-- <code>
+Итак, теперь у нас дан интерфейс Figure:
+</p>
+<code>
 <pre>
 &lt;?php
-	abstract class User	{
-		
+	interface Figure{
+		public function getSquare();
+		public function getPerimeter();
 	}
 ?></pre>
-</code> -->
+</code>
+<p>
+	Давайте напишем класс Quadrate, который будет реализовывать методы этого интерфейса:
+</p>
+<code>
+<pre>
+&lt;?php
+	class Quadrate implements Figure{
+		private $a;
+		public function __construct($a){
+			$this->a = $a;
+		}
+		public function getSquare(){
+			return $this->a * $this->a;
+		}
+		public function getPerimeter(){
+			return 4 * $this->a;
+		}
+	}
+?></pre>
+</code>
+<p>
+	Как это работает: если забыть реализовать какой-нибудь метод, описанный в интерфейсе, PHP выдаст нам фатальную ошибку. Давайте реализуем также класс Rectangle:
+</p>
+<code>
+<pre>
+&lt;?php
+	class Rectangle implements Figure
+	{
+		private $a;
+		private $b;
+		
+		public function __construct($a, $b)
+		{
+			$this->a = $a;
+			$this->b = $b;
+		}
+		
+		public function getSquare()
+		{
+			return $this->a * $this->b;
+		}
+		
+		public function getPerimeter()
+		{
+			return 2 * ($this->a + $this->b);
+		}
+	}
+?></pre>
+</code>
+<div class="task">
+	<h6>
+		1) Сделайте класс Disk (круг), реализующий интерфейс Figure.
+	</h6>
+	<p>
+		Решение:
+	</p>
+	<code>
+		<pre>
+	&lt;?php
+	interface Figure{
+		public function getSquare();
+		public function getPerimetr();
+	}
+	class Disk implements Figure{
+		const PI = 3.14;
+		private int $radius;
+		public function __construct(int $radius){
+			$this->radius = $radius;
+		}
+		public function getPerimetr(){
+			return 2*PI*$this->radius;
+		}
+		public function getSquare(){
+			return 2*PI*$this->radius**2;
+		}
+	}
+	$disk1 = new Disk(3);
+	echo 'Площадь круга с радиусом 3 = '.$disk1->getSquare();
+	echo'&lt;br/>';
+	echo 'Периметр круга с радиусом 3 = '.$disk1->getPerimetr();
+	?></pre>
+	</code>
+	<p>
+		Результат:
+	</p>
+	<?php
+	interface Figure{
+		public function getSquare();
+		public function getPerimetr();
+	}
+	class Disk implements Figure{
+		const PI = 3.14;
+		private int $radius;
+		public function __construct(int $radius){
+			$this->radius = $radius;
+		}
+		public function getPerimetr(){
+			return 2*self::PI*$this->radius;
+		}
+		public function getSquare(){
+			return self::PI*$this->radius**2;
+		}
+	}
+	$disk1 = new Disk(3);
+	echo 'Площадь круга с радиусом 3 = '.$disk1->getSquare();
+	echo'<br/>';
+	echo 'Периметр круга с радиусом 3 = '.$disk1->getPerimetr();
+	?>
+</div>
+<h5 class="text-center mt-3">
+	Замечание
+</h5>
+<p>
+Как уже было написано выше, не может быть интерфейса и класса с одинаковым названием. Это создает некоторые проблемы с придумыванием названий. Например, мы хотим сделать класс User, реализующий интерфейс User. Как мы видим, у нас конфликт имен. Для его разрешения, нужно или класс назвать по-другому, или интерфейс.
+
+Общепринято в таком случае название интерфейса начать с маленькой буквы i, чтобы показать, что это интерфейс, а не класс. То есть в нашем случае мы сделаем интерфейс iUser, а реализовывать его будет класс User. Такой подход мы иногда будем применять в следующих уроках.
+</p>
+<p class="text-center">
+	<a href="/page/oop/abstract-classes" class="p-2">Назад</a>
+	<a href="/page/interfaces/applying"  class="p-2">Далее</a>
+</p>
+</main>

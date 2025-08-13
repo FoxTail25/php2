@@ -72,9 +72,14 @@ foreach($arr as $elem):?>
 <p>Объект класса:<?=get_class($elem)?> Имя: <?=$elem->name?></p>
 <?php endforeach?>
 </div>
-	<h5 class="text-center mt-3">Функция get_class_methods</h5>
+<h5 class="text-center mt-3">
+	Функция get_class_methods
+</h5>
 <p class="bg-secondary-subtle p-2">
-Изучить теорию по следующей ссылке <a href="https://www.php.net/manual/ru/function.get-class-methods.php" target="_blank">get_class_methods</a>
+Изучить теорию по следующей ссылке 
+<a href="https://www.php.net/manual/ru/function.get-class-methods.php" target="_blank">get_class_methods
+	
+</a>
 </p>
 <div class="task">
 	<h6>
