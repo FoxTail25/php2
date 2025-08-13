@@ -8,12 +8,12 @@ $route = '^/$';
 if(preg_match("#$route#", $url, $params)){
 	$page = include 'page/home.php';
 }
-$route = '^/page/(?<slug1>[a-zA-Z0-9_-]+)$';
+$route = '^/page/(?<slug1>[a-zA-Z0-9_-]+)(?<get>[?a-zA-Z0-9=]*)$$';
 if(preg_match("#$route#", $url, $params)){
 	$page = include 'page/slug1.php';
 }
-$route = '^/page/(?<slug1>[a-zA-Z0-9_-]+)/(?<slug2>[a-zA-Z0-9_-]+)$';
-if (preg_match("#$route#", $url, $params)) {
+$route = '^/page/(?<slug1>[a-zA-Z0-9_-]+)/(?<slug2>[a-zA-Z0-9_-]+)(?<get>[?a-zA-Z0-9=&_]*)$';
+if (preg_match("'$route'", $url, $params)) {
 	$page = include 'page/slug2.php';
 }
 
