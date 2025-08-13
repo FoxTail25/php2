@@ -256,3 +256,92 @@ foreach($arrMethod as $elem){
 	(new Test_2)->getVars()
 	?>
 </div>
+<h5 class="text-center mt-3">Функция get_object_vars</h5>
+<p class="bg-secondary-subtle p-2">
+Изучить теорию по следующей ссылке <a href="https://www.php.net/manual/ru/function.get-object-vars.php" target="_blank">get_object_vars</a>
+</p>
+<div class="task">
+	<h6>
+		8) Сделайте класс Test_3 с публичным свойством prop1, с приватными свойством prop2 и защищённым prop3. Создайте объект этого класса. С помощью функции get_object_vars получите массив свойств созданного объекта.
+	</h6>
+	<p>
+		Решение:
+	</p>
+	<code>
+		<pre>
+	&lt;?php
+	class Test_3 {
+		public $prop1 = 1;
+		private $prop2 = 2;
+		protected $prop3 = 3;
+	}
+	$test = new Test_3;
+	var_dump(get_object_vars($test));
+	?></pre>
+	</code>
+	<p>
+		Результат:
+	</p>
+	<?php
+	class Test_3 {
+		public $prop1 = 1;
+		private $prop2 = 2;
+		protected $prop3 = 3;
+	}
+	$test = new Test_3;
+	var_dump(get_object_vars($test));
+	?>
+</div>
+<h5 class="text-center mt-3">Функция class_exists</h5>
+<p class="bg-secondary-subtle p-2">
+Изучить теорию по следующей ссылке <a href="https://www.php.net/manual/ru/function.get-object-vars.php" target="_blank">class_exists</a>
+</p>
+<div class="task">
+	<h6>
+		9) Пусть у вас есть класс TestOne и нет класса TestTwo. Проверьте, что выведет функция class_exists для класса Test1 и для класса Test2.
+	</h6>
+	<p>
+		Решение:
+	</p>
+	<code>
+		<pre>
+	&lt;?php
+	class TestOne{};
+	var_dump(class_exists('TestOne'));
+	echo '&lt;br/>';
+	var_dump(class_exists('TestTwo'));
+	?></pre>
+	</code>
+	<p>
+		Результат:
+	</p>
+	<?php
+	class TestOne{};
+	var_dump(class_exists('TestOne'));
+	echo '<br/>';
+	var_dump(class_exists('TestTwo'));
+	?>
+</div>
+<!-- <div class="task">
+	<h6>
+		10) Пусть GET параметром в адресную строку передается название класса. Проверьте, существует ли такой класс. Выведите соответствующее сообщение на экран.
+	</h6>
+	<p>
+		Решение:
+	</p>
+	<code>
+		<pre>
+	&lt;?php
+
+	?></pre>
+	</code>
+	<p>
+		Результат:
+	</p>
+	<?php
+// if(isset($_GET['messag'])){
+// 	echo $_GET['message'];
+// }
+	?>
+	<a href="?messag=1">test</a>
+</div> -->
