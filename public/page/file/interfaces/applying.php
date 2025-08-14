@@ -113,28 +113,9 @@
 	<code>
 		<pre>
 	&lt;?php
-
-	?></pre>
-	</code>
-	<p>
-		Результат:
-	</p>
-	<?php
 	interface iFigure {
 		public function getSquare();
 		public function getPerimetr();
-	}
-	class Figure implements iFigure{
-		protected int $sideA;
-		public function __construct(int $sideA){
-			$this->sideA = $sideA;
-		}
-		public function getSquare(){
-			return $this->sideA**2;
-		}
-		public function getPerimetr(){
-			return $this->sideA*4;
-		}
 	}
 	class FigureCollection {
 		private $figures = [];
@@ -149,17 +130,182 @@
 			return $totalSquareSum;
 		}
 	}
-	class Square extends Figure{};
-	$square1 = new Square(4);
-
-	class Rectangle extends Figure{
-		private int $sideB;
+	class Square implements iFigure{
+		protected int $sideA;
+		public function __construct(int $sideA){
+			$this->sideA = $sideA;
+		}
+		public function getSquare(){
+			return $this->sideA**2;
+		}
+		public function getPerimetr(){
+			return $this->sideA*4;
+		}
+	}
+	class Rectangle implements iFigure{
+		protected int $sideA;
+		protected int $sideB;
 		public function __construct(int $sideA, int $sideB){
-			parent::__construct($sideA);
+			$this->sideA = $sideA;
 			$this->sideB = $sideB;
 		}
-
+		public function getSquare(){
+			return $this->sideA * $this->sideB;
+		}
+		public function getPerimetr(){
+			return ($this->sideA + $this->sideB)*2;
+		}
 	}
+	$figureCollection = new FigureCollection;
+	$figureCollection->addFigure(new Square(4));
+	$figureCollection->addFigure(new Rectangle(4,2));
+	echo $figureCollection->getTotalSquare();
+	?></pre>
+	</code>
+	<p>
+		Результат:
+	</p>
+	<?php
+	interface iFigure {
+		public function getSquare();
+		public function getPerimetr();
+	}
+	class FigureCollection {
+		private $figures = [];
+		public function addFigure(iFigure $newFigure){
+			$this->figures[] = $newFigure;
+		}
+		public function getTotalSquare(){
+			$totalSquareSum = 0;
+			foreach($this->figures as $figure){
+				$totalSquareSum += $figure->getSquare();
+			}
+			return $totalSquareSum;
+		}
+		public function getTotalPerimeter(){
+			$totalPerimetrSum = 0;
+			foreach($this->figures as $figure){
+				$totalPerimetrSum += $figure->getPerimetr();
+			}
+			return $totalPerimetrSum;
+		}
+	}
+	class Square implements iFigure{
+		protected int $sideA;
+		public function __construct(int $sideA){
+			$this->sideA = $sideA;
+		}
+		public function getSquare(){
+			return $this->sideA**2;
+		}
+		public function getPerimetr(){
+			return $this->sideA*4;
+		}
+	}
+	class Rectangle implements iFigure{
+		protected int $sideA;
+		protected int $sideB;
+		public function __construct(int $sideA, int $sideB){
+			$this->sideA = $sideA;
+			$this->sideB = $sideB;
+		}
+		public function getSquare(){
+			return $this->sideA * $this->sideB;
+		}
+		public function getPerimetr(){
+			return ($this->sideA + $this->sideB)*2;
+		}
+	}
+	$figureCollection = new FigureCollection;
+	$figureCollection->addFigure(new Square(4));
+	$figureCollection->addFigure(new Rectangle(4,2));
+	echo $figureCollection->getTotalSquare();
 
 	?>
 </div>
+<div class="task">
+	<h6>
+		2) Добавьте в класс FiguresCollection метод getTotalPerimeter для нахождения суммарного периметра всех фигур.
+	</h6>
+	<p>
+		Решение:
+	</p>
+	<code>
+		<pre>
+	&lt;?php
+	interface iFigure {
+		public function getSquare();
+		public function getPerimetr();
+	}
+	class FigureCollection {
+		private $figures = [];
+		public function addFigure(iFigure $newFigure){
+			$this->figures[] = $newFigure;
+		}
+		public function getTotalSquare(){
+			$totalSquareSum = 0;
+			foreach($this->figures as $figure){
+				$totalSquareSum += $figure->getSquare();
+			}
+			return $totalSquareSum;
+		}
+		public function getTotalPerimeter(){
+			$totalPerimetrSum = 0;
+			foreach($this->figures as $figure){
+				$totalPerimetrSum += $figure->getPerimetr();
+			}
+			return $totalPerimetrSum;
+		}
+	}
+	class Square implements iFigure{
+		protected int $sideA;
+		public function __construct(int $sideA){
+			$this->sideA = $sideA;
+		}
+		public function getSquare(){
+			return $this->sideA**2;
+		}
+		public function getPerimetr(){
+			return $this->sideA*4;
+		}
+	}
+	class Rectangle implements iFigure{
+		protected int $sideA;
+		protected int $sideB;
+		public function __construct(int $sideA, int $sideB){
+			$this->sideA = $sideA;
+			$this->sideB = $sideB;
+		}
+		public function getSquare(){
+			return $this->sideA * $this->sideB;
+		}
+		public function getPerimetr(){
+			return ($this->sideA + $this->sideB)*2;
+		}
+	}
+	$figureCollection = new FigureCollection;
+	$figureCollection->addFigure(new Square(4));
+	$figureCollection->addFigure(new Rectangle(4,2));
+	echo $figureCollection->getTotalSquare();
+	echo '&lt;br/>';
+	echo $figureCollection->getTotalPerimeter();
+	?></pre>
+	</code>
+	<p>
+		Результат:
+	</p>
+	<?php
+	$figureCollection = new FigureCollection;
+	$figureCollection->addFigure(new Square(4));
+	$figureCollection->addFigure(new Rectangle(4,2));
+	echo $figureCollection->getTotalSquare();
+	echo '<br/>';
+	echo $figureCollection->getTotalPerimeter();
+
+	?>
+</div>
+<p class="text-center">
+	<a href="/page/oop/intro" class="p-2">Назад</a>
+	<a href="/page/interfaces/parameters"  class="p-2">Далее</a>
+</p>
+</main>
