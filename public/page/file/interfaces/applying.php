@@ -120,6 +120,46 @@
 		Результат:
 	</p>
 	<?php
+	interface iFigure {
+		public function getSquare();
+		public function getPerimetr();
+	}
+	class Figure implements iFigure{
+		protected int $sideA;
+		public function __construct(int $sideA){
+			$this->sideA = $sideA;
+		}
+		public function getSquare(){
+			return $this->sideA**2;
+		}
+		public function getPerimetr(){
+			return $this->sideA*4;
+		}
+	}
+	class FigureCollection {
+		private $figures = [];
+		public function addFigure(iFigure $newFigure){
+			$this->figures[] = $newFigure;
+		}
+		public function getTotalSquare(){
+			$totalSquareSum = 0;
+			foreach($this->figures as $figure){
+				$totalSquareSum += $figure->getSquare();
+			}
+			return $totalSquareSum;
+		}
+	}
+	class Square extends Figure{};
+	$square1 = new Square(4);
+
+	class Rectangle extends Figure{
+		private int $sideB;
+		public function __construct(int $sideA, int $sideB){
+			parent::__construct($sideA);
+			$this->sideB = $sideB;
+		}
+
+	}
 
 	?>
 </div>
