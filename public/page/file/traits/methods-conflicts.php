@@ -16,7 +16,6 @@
 			return 1;
 		}
 	}
-	
 	trait Trait2{
 		private function method(){
 			return 2;
@@ -47,7 +46,6 @@
 			Trait1::method insteadof Trait2;
 		}
 	}
-	
 	new Test;
 ?></pre>
 </code>
@@ -62,13 +60,11 @@
 	class Test{
 		use Trait1, Trait2 {
 			Trait1::method insteadof Trait2;
-		}
-		
+		}	
 		public function __construct(){
 			echo $this->method(); // выведет 1, тк это метод первого трейта
 		}
 	}
-	
 	new Test;
 ?></pre>
 </code>
@@ -81,13 +77,11 @@
 	class Test{
 		use Trait1, Trait2 {
 			Trait2::method insteadof Trait1;
-		}
-		
+		}	
 		public function __construct(){
 			echo $this->method(); // выведет 2, тк это метод второго трейта
 		}
 	}
-	
 	new Test;
 ?></pre>
 </code>
@@ -101,13 +95,11 @@
 		use Trait1, Trait2 {
 			Trait1::method insteadof Trait2; // берем метод из первого трейта
 			Trait2::method as method2; // метод второго трейта будет доступен как method2
-		}
-		
+		}	
 		public function __construct(){
 			echo $this->method() + $this->method2(); // выведет 3
 		}
 	}
-	
 	new Test;
 ?></pre>
 </code>
@@ -122,13 +114,11 @@
 			Trait1::method insteadof Trait2;
 			Trait1::method as method1; // метод первого трейта будет доступен как method1
 			Trait2::method as method2; // метод второго трейта будет доступен как method2
-		}
-		
+		}	
 		public function __construct(){
 			echo $this->method1() + $this->method2(); // выведет 3
 		}
 	}
-	
 	new Test;
 ?></pre>
 </code>
@@ -143,13 +133,11 @@
 		use Trait1, Trait2 {
 			Trait1::method as method1;
 			Trait2::method as method2;
-		}
-		
+		}	
 		public function __construct(){
 			echo $this->method1() + $this->method2();
 		}
 	}
-	
 	new Test;
 ?></pre>
 </code>

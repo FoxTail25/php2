@@ -11,18 +11,15 @@
 <code>
 <pre>
 &lt;?php
-	trait Helper
-	{
+	trait Helper{
 		private $name;
 		private $age;
 		
-		public function getName()
-		{
+		public function getName(){
 			return $this->name;
 		}
 		
-		public function getAge()
-		{
+		public function getAge(){
 			return $this->age;
 		}
 	}
@@ -34,10 +31,8 @@
 <code>
 <pre>
 &lt;?php
-	class User
-	{
-		public function __construct($name, $age)
-		{
+	class User{
+		public function __construct($name, $age){
 			$this->name = $name;
 			$this->age = $age;
 		}
@@ -50,12 +45,10 @@
 <code>
 <pre>
 &lt;?php
-	class User
-	{
+	class User{
 		use Helper; // подключаем трейт
 		
-		public function __construct($name, $age)
-		{
+		public function __construct($name, $age){
 			$this->name = $name;
 			$this->age = $age;
 		}
@@ -81,12 +74,9 @@
 <code>
 <pre>
 &lt;?php
-	class City
-	{
+	class City{
 		use Helper;
-		
-		public function __construct($name, $age)
-		{
+		public function __construct($name, $age){
 			$this->name = $name;
 			$this->age = $age;
 		}
