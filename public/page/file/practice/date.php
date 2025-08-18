@@ -105,21 +105,21 @@ class Date{
 	const MonthEn = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 	const WeekDayRu = ['Воскресенье','Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 	const WeekDayEn = ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+	const DateRegul = '^(?<year>[0-9]{4})-(?<month>[0-9]{1,2})-(?<day>[0-9]{1,2})$';
 	public function __construct($date = null){ //принимает дату в формате год-месяц-день
-		$regDate = '^(?<year>[0-9]{4})-(?<month>[0-9]{1,2})-(?<day>[0-9]{1,2})$';
+		$regDate = self::DateRegul;
 		if(isset($date) and preg_match("#$regDate#",$date, $newDate)){
 			$this->year = $newDate['year'];
 			$this->month = $newDate['month'];
 			$this->day = $newDate['day'];
 		} else {
 			$this->year = date('Y',time());
-			$this->month = date('n',time());
-			$this->day = date('j',time());
+			$this->month = date('m',time());
+			$this->day = date('d',time());
 		}
 	}
 	public function getDay(){
 		return $this->day;
-		// return $this->day = mktime(0,0,0,$this->month,$this->day,$this->year);
 	}
 	public function getMonth(string $lang=null){ //ru или en
 		$monthInArr = $this->month-1;
@@ -145,68 +145,76 @@ class Date{
 		}
 	}
 
-		public function addDay($value){
-			$newDay = $this->day + $value;
-			$this->setDate($this->year, $this->month, $newDay);
-		}
-		public function subDay($value){
-			$newDay = $this->day - $value;
-			$this->setDate($this->year, $this->month, $newDay);
-		}
-		public function addMonth($value){
-			$newMonth = $this->month + $value;
-			$this->setDate($this->year, $newMonth, $this->day);
-		}
-		public function subMonth($value){
-			$newMonth = $this->month - $value;
-			$this->setDate($this->year, $newMonth, $this->day);
-		}
-		public function addYear($value){
-			$newYear = $this->year + $value;
-			$this->setDate($newYear, $this->month, $this->day);
-		}
-		public function subYear($value){
-			$newYear = $this->year - $value;
-			$this->setDate($newYear, $this->month, $this->day);
-		}
-		public function format($format){
-			// выведет дату в указанном формате
-			// формат пусть будет такой же, как в функции date
-			return date($format,mktime(0,0,0,$this->$month,$this->$day,$this->$year));
-		}
-		public function __toString(){
-			// выведет дату в формате 'год-месяц-день'
-			return (string) $this->year.'-'.$this->month.'-'.$this->day;
-		}
+	public function addDay($value){
+		$newDay = $this->day + $value;
+		$this->setDate($this->year, $this->month, $newDay);
+		return $this;
+	}
+	public function subDay($value){
+		$newDay = $this->day - $value;
+		$this->setDate($this->year, $this->month, $newDay);
+		return $this;
+	}
+	public function addMonth($value){
+		$newMonth = $this->month + $value;
+		$this->setDate($this->year, $newMonth, $this->day);
+		return $this;
+	}
+	public function subMonth($value){
+		$newMonth = $this->month - $value;
+		$this->setDate($this->year, $newMonth, $this->day);
+		return $this;
+	}
+	public function addYear($value){
+		$newYear = $this->year + $value;
+		$this->setDate($newYear, $this->month, $this->day);
+		return $this;
+	}
+	public function subYear($value){
+		$newYear = $this->year - $value;
+		$this->setDate($newYear, $this->month, $this->day);
+		return $this;
+	}
+	public function format($format){
+		return date($format,mktime(0,0,0,$this->$month,$this->$day,$this->$year));
+	}
+	public function __toString(){
+		return (string) $this->year.'-'.$this->month.'-'.$this->day;
+	}
 
+	private function setDate($year, $month, $day){
 
+		$date = date('Y-m-d',mktime(0,0,0,$month,$day,$year));
+		$regDate = self::DateRegul;
+		preg_match("#$regDate#",$date, $newDate);
 
-
-
-
-
-		private function setDate($year, $month, $day){
-
-			$date = date('Y-n-j',mktime(0,0,0,$month,$day,$year));
-			$regDate = '^(?<year>[0-9]{4})-(?<month>[0-9]{1,2})-(?<day>[0-9]{1,2})$';
-			preg_match("#$regDate#",$date, $newDate);
-
-			$this->year = $newDate['year'];
-			$this->month = $newDate['month'];
-			$this->day = $newDate['day'];
-		}
-
+		$this->year = $newDate['year'];
+		$this->month = $newDate['month'];
+		$this->day = $newDate['day'];
+	}
 }
-$date = new Date();
-$date->subDay(31);
 
+	$date = new Date('2025-12-31');
+	
+	echo $date->getYear();  // выведет '2025'
+	echo '<br/>';
+	echo $date->getMonth(); // выведет '12'
+	echo '<br/>';
+	echo $date->getDay();   // выведет '31'
+	echo '<br/>';
+	
+	echo $date->getWeekDay();     // выведет '3'
+	echo '<br/>';
+	echo $date->getWeekDay('ru'); // выведет 'среда'
+	echo '<br/>';
+	echo $date->getWeekDay('en'); // выведет 'wednesday'
+	echo '<br/>';
+	
+	echo (new Date('2025-12-31'))->addYear(1); // '2026-12-31'
+	echo '<br/>';
+	echo (new Date('2025-12-31'))->addDay(1);  // '2026-01-01'
+	echo '<br/>';
+	
+	echo (new Date('2025-12-31'))->subDay(3)->addYear(1); // '2026-12-28'
 ?>
-<p class="mb-0"><?=$date->getDay()?></p>
-<p class="mb-0"><?=$date->getMonth('en')?></p>
-<p class="mb-0"><?=$date->getMonth('ru')?></p>
-<p class="mb-0"><?=$date->getMonth('r')?></p>
-<p class="mb-0"><?=$date->getYear()?></p>
-<p class="mb-0"><?=$date->getWeekDay()?></p>
-<p class="mb-0"><?=$date->getWeekDay('ru')?></p>
-<p class="mb-0"><?=$date->getWeekDay('en')?></p>
 </div>
