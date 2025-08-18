@@ -218,3 +218,16 @@ class Date{
 	echo (new Date('2025-12-31'))->subDay(3)->addYear(1); // '2026-12-28'
 ?>
 </div>
+<?php
+	// $url = 'http://192.168.1.53:3000/api/calendar_bd?month=3&year=2025';
+	// $res = file_get_contents($url);
+	
+	// var_dump($res);
+?>
+
+
+<p class="text-center">
+	<a href="/page/magic/set" class="p-2">Назад</a>
+	<a href="/page/practice/Interval"  class="p-2">Далее</a>
+</p>
+</main>
