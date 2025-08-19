@@ -185,6 +185,8 @@ echo $div->open().'тест класса Tag'.$div->close();
 	<code>
 		<pre>
 	&lt;?php
+	$header = new Tag('header');
+	echo $header->open().'содержимое тега header'.$header->close();
 	?></pre>
 	</code>
 	<p>

@@ -1,15 +1,188 @@
 <main>
-	<h2 class="text-center pt-2">Интерфейсы в ООП на PHP</h2>
-<p>
-	Как вы уже знаете, абстрактные классы представляют собой набор методов для своих потомков. Часть этих методов может быть реализована в самом классе, а часть методов может быть объявлена абстрактными и требовать реализации в дочерних классах.
-	Представим себе ситуацию, когда ваш абстрактный класс представляет собой только набор абстрактных публичных методов, не добавляя методы с реализацией.
-	Фактически ваш родительский класс описывает интерфейс потомков, то есть набор их публичных методов, обязательных для реализации.
-	Зачем нам такое нужно: чтобы при программировании совершать меньше ошибок - описав все необходимые методы в классе-родителе, мы можем быть уверенны в том, что все потомки их действительно реализуют.
-	Когда это поможет: пусть мы создадим наш класс-родитель и несколько потомков к нему. Если потом через некоторое время, например, через месяц, мы решим создать еще одного потомка, наверняка мы уже забудем детали нашего кода и вполне можем забыть написать реализацию какого-нибудь метода в новом потомке. Однако сам PHP не позволит потерять метод - и просто выдаст ошибку.
-	То же самое касается другого программиста, работающего с вашим проектом. Пусть код класса-родителя писали вы, а затем ваш коллега решил создать еще одного потомка. У вашего коллеги также не получится потерять парочку методов.
-	Есть, однако, проблема: фактически мы сделали наш класс-родитель для того, чтобы писать в нем абстрактные публичные методы, но мы сами или наш коллега имеем возможность случайно добавить в этот класс не публичный метод или не абстрактный.
-	Пусть мы хотим физически запретить делать в родителе иные методы, кроме абстрактных публичных. В PHP для этого вместо абстрактных классов можно использовать интерфейсы.
-	Интерфейсы представляют собой классы, у которых все методы являются публичными и не имеющими реализации. Код методов должны реализовывать классы-потомки интерфейсов.
-	Интерфейсы объявляются так же, как и обычные классы, но используя ключевое слово interface вместо слова class.
-	Для наследования от интерфейсов используется немного другая терминология: говорят, что классы не наследуют от интерфейсов, а реализуют их. Соответственно вместо слова extends следует использовать ключевое слово implements.
-</p>
+	<h2 class="text-center pt-2">
+		Атрибуты тегов в классе Tag
+	</h2>
+	<p>
+		Пусть теперь мы хотим сделать так, чтобы в создаваемых тегах можно было указывать атрибуты и их значения. Давайте будем передавать атрибуты для тега в виде ассоциативного массива в конструктор тега.
+
+		Вот пример (пока не рабочий, это наша цель):
+	</p>
+	<code>
+		<pre>
+	&lt;?php
+	$tag = new Tag('input', ['id' => 'test', 'class' => 'eee bbb']);
+	echo $tag->open(); // выведет &lt;input id="test" class="eee bbb">
+	?></pre>
+	</code>
+	<p>
+		Давайте сделаем в нашем классе вспомогательный приватный метод getAttrsStr, который параметром будет получать массив, а возвращать строку с атрибутами. Пример работы нашего метода:
+	</p>
+	<code>
+		<pre>
+	&lt;?php
+	$attrs = ['id' => 'test', 'class' => 'eee bbb'];
+	echo $this->getAttrsStr($attrs); // выведет ' id="test" class="eee bbb"'
+	?></pre>
+	</code>
+	<p>
+		Давайте напишем его реализацию:
+	</p>
+	<code>
+		<pre>
+	&lt;?php
+	private function getAttrsStr($attrs){
+		if (!empty($attrs)) {
+			$result = '';
+			
+			foreach ($attrs as $name => $value) {
+				$result .= " $name=\"$value\"";
+			}
+			
+			return $result;
+		} else {
+			return '';
+		}
+	}
+	?></pre>
+	</code>
+	<p>
+		Добавим созданный метод в наш класс:
+	</p>
+	<code>
+		<pre>
+	&lt;?php
+	class Tag {
+		private $name;
+		private $attrs;
+		
+		public function __construct($name, $attrs = []) {
+			$this->name = $name;
+			$this->attrs = $attrs; // записываем атрибуты в свойство
+		}
+		
+		public function open() {
+			$name = $this->name;
+			$attrsStr = $this->getAttrsStr($this->attrs); // формируем строку с атрибутами
+			
+			return "<$name$attrsStr>"; // добавляем атрибуты после имени тега
+		}
+		
+		public function close()	{
+			$name = $this->name;
+			return "</$name>";
+		}
+		
+		// Формируем строку с атрибутами:
+		private function getAttrsStr($attrs){
+			if (!empty($attrs)) {
+				$result = '';
+				
+				foreach ($attrs as $name => $value) {
+					$result .= " $name=\"$value\"";
+				}
+				
+				return $result;
+			} else {
+				return '';
+			}
+		}
+	}
+	?></pre>
+	</code>
+	<p>
+		Проверим работу нашего метода:
+	</p>
+	<code>
+		<pre>
+	&lt;?php
+	$tag = new Tag('input', ['id' => 'test', 'class' => 'eee bbb']);
+	echo $tag->open(); // выведет &lt;input id="test" class="eee bbb">
+	?></pre>
+	</code>
+	<div class="task">
+	<h6>
+		1) Самостоятельно, не подсматривая в код выше, добавьте в класс Tag возможность добавления атрибутов тега.
+	</h6>
+	<p>
+		Решение:
+	</p>
+	<code>
+		<pre>
+	&lt;?php
+	class Tag{
+		private $name;
+		private $attrs;
+		public function __construct($name, $attrs = []){
+			$this->name = $name;
+			$this->attrs = $attrs;
+		}
+		public function open(){
+		return '<'.$this->name.' '.$this->getAttrsStr($this->attrs).'>';
+		}
+		public function close(){
+		return '</'.$this->name.'>';
+		}
+
+		private function getAttrsStr($attrs){
+			if(!empty($attrs)){
+				$attrStr = '';
+				foreach($this->attrs as $name => $value){
+					$attrStr .= "$name=\"$value\" ";
+				}
+				return $attrStr;
+			} else {
+				return '';
+			}
+		}
+	}
+	$div = new Tag('div', ['id'=>'test', 'class'=>'aaa bbb']);
+	echo $div->open().'div text'.$div->close();
+	?></pre>
+	</code>
+	<p>
+		Результат:
+	</p>
+	<?php
+	class Tag{
+		private $name;
+		private $attrs;
+		public function __construct($name, $attrs = []){
+			$this->name = $name;
+			$this->attrs = $attrs;
+		}
+		public function open(){
+		return '<'.$this->name.' '.$this->getAttrsStr($this->attrs).'>';
+		}
+		public function close(){
+		return '</'.$this->name.'>';
+		}
+
+		private function getAttrsStr($attrs){
+			if(!empty($attrs)){
+				$attrStr = '';
+				foreach($this->attrs as $name => $value){
+					$attrStr .= "$name=\"$value\" ";
+				}
+				return $attrStr;
+			} else {
+				return '';
+			}
+		}
+	}
+	$div = new Tag('div', ['id'=>'test', 'class'=>'aaa bbb']);
+	echo $div->open().'div text'.$div->close();
+
+	?>
+	</div>
+
+
+
+
+
+
+	
+	<p class="text-center">
+		<a href="/page/practice/tag" class="p-2">Назад</a>
+		<a href="/page/practice/method-chains"  class="p-2">Далее</a>
+	</p>
+</main>
