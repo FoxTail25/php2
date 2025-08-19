@@ -107,6 +107,94 @@
 ?>
 		</pre>
 	</code>
+	<div class="task">
+	<h6>
+		1) Самостоятельно, не подсматривая в код выше, сделайте такой же класс Tag.
+	</h6>
+	<p>
+		Решение:
+	</p>
+	<code>
+		<pre>
+	&lt;?php
+	class Tag{
+		private string $name;
+		public function __construct(string $tagName){
+			$this->name = $tagName;
+		}
+		public function open(){
+			return "<$this->name>";
+		}
+		public function close(){
+			return "</$this->name>";
+		}
+	}
+	$div = new Tag('div');
+	echo $div->open().'тест класса Tag'.$div->close();
+	?></pre>
+	</code>
+	<p>
+		Результат:
+	</p>
+	<?php
+class Tag{
+	private string $name;
+	public function __construct(string $tagName){
+		$this->name = $tagName;
+	}
+	public function open(){
+		return "<$this->name>";
+	}
+	public function close(){
+		return "</$this->name>";
+	}
+}
+$div = new Tag('div');
+echo $div->open().'тест класса Tag'.$div->close();
+	?>
+	</div>
+	<div class="task">
+	<h6>
+		2) Создайте с помощью класса Tag тег &lt;img> и выведите его на экран.
+	</h6>
+	<p>
+		Решение:
+	</p>
+	<code>
+		<pre>
+	&lt;?php
+	$img = new Tag('img');
+	echo $img->open();
+	?></pre>
+	</code>
+	<p>
+		Результат:
+	</p>
+	<?php
+	$img = new Tag('img');
+	echo $img->open();
+	?>
+	</div>
+	<div class="task">
+	<h6>
+		3) Создайте с помощью класса Tag тег &lt;header> и выведите его на экран с текстом 'header сайта'.
+	</h6>
+	<p>
+		Решение:
+	</p>
+	<code>
+		<pre>
+	&lt;?php
+	?></pre>
+	</code>
+	<p>
+		Результат:
+	</p>
+	<?php
+	$header = new Tag('header');
+	echo $header->open().'содержимое тега header'.$header->close();
+	?>
+	</div>
 
 
 
@@ -114,6 +202,6 @@
 
 	<p class="text-center">
 		<a href="/page/practice/file" class="p-2">Назад</a>
-		<a href="/page/practice/"  class="p-2">Далее</a>
+		<a href="/page/practice/tag-attributes"  class="p-2">Далее</a>
 	</p>
 </main>
