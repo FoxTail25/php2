@@ -7,6 +7,6 @@ class Link extends Tag {
 	}
 }
 for($i=1; $i<=5; $i++ ){
-	echo (new Link)->setText("page$i")->setAttr('href',"/$i.php")->show().'<br/>';
+		echo (new Link)->setText("page$i")->setAttr('href',"/page/task/$i")->show().'<br/>';
 }
 ?>
