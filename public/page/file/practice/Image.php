@@ -142,6 +142,73 @@
 	<code>
 		<pre>
 &lt;?php
+include_once('classes/origin/Tag.php');
+class Image extends Tag {
+	public function __construct(){
+		$this->setAttr('src', '')->setAttr('alt', '');
+		parent::__construct('img');
+	}
+}
+	<!-- echo (new Image())->setAttr('src', 
+		'img.png')->open(); -->
+?></pre>
+	</code>
+	<p>
+		Результат:
+	</p>
+	<?php
+// include_once('classes/origin/Tag.php');
+// class Image extends Tag {
+// 	public function __construct(){
+// 		$this->setAttr('src', '')->setAttr('alt', 'image');
+// 		parent::__construct('img');
+// 	}
+// }
+	// echo (new Image())->setAttr('src', 
+	// 	'img.png')->open(); // <img src="img.png" alt="">
+	?>
+	</div>
+	<div class="task">
+	<h6>
+		2) Используя созданный вами класс выведите на экран какую-нибудь картинку.
+	</h6>
+	<p>
+		Решение:
+	</p>
+	<code>
+		<pre>
+&lt;?php
+	echo (new Image())->setAttr('src', '/img/smile.png')->open();
+?></pre>
+	</code>
+	<p>
+		Результат:
+	</p>
+	<?php
+include_once('classes/origin/Tag.php');
+class Image extends Tag {
+	public function __construct(){
+		$this->setAttr('src', '')->setAttr('alt', 'image');
+		parent::__construct('img');
+	}
+	public function __toString(){
+		return $this->open();
+	}
+}
+	echo (new Image())->setAttr('src', '/img/smile.png')->open(); // <img src="img.png" alt="">
+	?>
+	</div>
+	<div class="task">
+	<h6>
+		3) Установите созданной вами картинке атрибут width в значение 300, а атрибут height - в значение 200.
+	</h6>
+	<p>
+		Решение:
+	</p>
+	<code>
+		<pre>
+&lt;?php
+	echo (new Image())->setAttr('src', '/img/smile.png')->open();
 ?></pre>
 	</code>
 	<p>
@@ -149,5 +216,87 @@
 	</p>
 	<?php
 
+	echo (new Image())->setAttr('src', '/img/smile.png')->setAttr('width', '300')->setAttr('height', '200')->open(); // <img src="img.png" alt="">
 	?>
 	</div>
+	<h5 class="text-center mt-3">Откажемся от open</h5>
+	<p>
+		В классе Tag у нас есть два метода, которые используются для завершения цепочки и вывода тега на экран: это метод open и метод show. Почему у нас два метода: потому что класс Tag универсальный и предполагает использование как для тегов, не требующих закрытия, так и для парных тегов. Очевидно, что при использовании класса Image мы всегда будем завершать цепочку методом open. Раз так, то давайте сделаем использование метода open не обязательным. То есть вместо этого:
+	</p>
+	<code>
+		<pre>&lt;?php
+	echo (new Image())->setAttr('src', 'img.png')->open();
+?></pre>
+	</code>
+	<p>
+		Мы будем писать вот так:
+	</p>
+	<code>
+		<pre>&lt;?php
+		echo (new Image())->setAttr('src', 'img.png');
+?></pre>
+	</code>
+	<p>
+		Используем для этого магический метод __toString:
+	</p>
+	<code>
+		<pre>&lt;?php
+		class Image extends Tag	{
+		public function __construct() {
+			$this->setAttr('src', '')->setAttr('alt', '');
+			parent::__construct('img');
+		}
+		public function __toString() {
+			return parent::open(); // вызываем метод родителя
+		}
+	}
+?></pre>
+	</code>
+	<p>
+		Теперь получается, что при попытке преобразования объекта в строку, например, при выводе его через echo, автоматически будет вызываться метод __toString, внутри которого будет вызываться метод open. Напоминаю, что если не выводить объект на экран, а, например, записать в переменную, то в эту переменную попадет объект, а не его строковое представление:
+	</p>
+	<code>
+		<pre>&lt;?php
+	// В переменную $image запишется объект:
+	$image = (new Image())->setAttr('src', 'img.png');
+	
+	$image->setAttr('width', '200'); // вызовем еще метод
+	echo $image; // тут сработает __toString
+?></pre>
+	</code>
+	<div class="task">
+	<h6>
+		4) Самостоятельно напишите реализацию метода __toString.
+	</h6>
+	<p>
+		Решение:
+	</p>
+	<code>
+		<pre>
+&lt;?php
+include_once('classes/origin/Tag.php');
+class Image extends Tag {
+	public function __construct(){
+		$this->setAttr('src', '')->setAttr('alt', 'image');
+		parent::__construct('img');
+	}
+	public function __toString(){
+		return $this->open();
+	}
+}
+echo (new Image())->setAttr('src', '/img/smile.png');
+?></pre>
+	</code>
+	<p>
+		Результат:
+	</p>
+	<?php
+
+	echo (new Image())->setAttr('src', '/img/smile.png'); // <img src="img.png" alt="">
+	?>
+	</div>
+	<p class="text-center">
+		<a href="/page/practice/final-code" class="p-2">Назад</a>
+		<a href="/page/practice/Link"  class="p-2">Далее</a>
+	</p>
+</main>

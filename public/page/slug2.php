@@ -7,7 +7,10 @@ $slug2 = $params['slug2'];
 			include $name; 
 		return ob_get_clean(); 
 	}
-
+if($params['slug1'] == 'task') {
+	$content = getFile('page/file/'.$slug1.'/'.$slug2.'.php');
+	return ['title'=> 'task', 'content'=> $content];
+}
 $contPage = file_get_contents('template/leftNav/'.$slug1.'.html');
 
 // $content = file_get_contents('page/file/'.$slug1.'/'.$slug2.'.php');
